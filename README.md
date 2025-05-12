@@ -41,7 +41,7 @@ Na imagem abaixo é ilustrada a arquitetura utilizada para orquestrar as aplica�
 docker-compose up --build
 ```
 
-Após iniciar, os serviços estarão disponíveis em:
+Após iniciar, o gateway estará disponível em:
 
 - API: http://localhost:5000 (porta padrão)
 - Prometheus: http://localhost:9090
@@ -54,15 +54,14 @@ Após iniciar, os serviços estarão disponíveis em:
 |---|---|---|
 |GET|/Token|Gera um token de autenticação para o usuário e senha informados|
 |POST|/Usuario|Adiciona um Usuário na base de dados|
-|DELETE|/Usuario{id}|Remove o Usuário na base de dados com o ID informado|
 
 ### Gerenciamento de Contatos
 |Método|Endpoint|Descrição|
 |---|---|---|
 |GET|/Contatos|Lista os Contatos cadastrados, ordenados por nome, que correspondem aos parâmetros informados|
-|POST|/Contatos|Adiciona um Contato na base de dados|
-|PATCH|/Contatos|Atualiza um Contato na base de dados|
-|DELETE|/Contatos{id}|Remove o contato na base de dados com o ID informado|
+|POST|/AdicionarContato|Adiciona um Contato na base de dados|
+|PATCH|/AtualizarContato|Atualiza um Contato na base de dados|
+|DELETE|/RemoverContato/{id}|Remove o contato na base de dados com o ID informado|
 
 ## Uso da API
 Para acessar os endpoints, você precisará autenticar o usuário e incluir o token JWT no cabeçalho das requisições aos endpoints protegidos.
@@ -124,7 +123,7 @@ Após acessar o Grafana (http://localhost:3000), siga os passos abaixo:
 
 ---
 ## Testes
-Para executar os testes, use o comando:
+Para executar os testes, e para cada solução no repositório, use o comando:
 
 ```bash
 dotnet test
@@ -140,7 +139,9 @@ Os testes de unidade foram implementados utilizando o Moq e FluentAssertions par
 - **Swagger** - Documentação interativa da API
 - **RabbitMQ** - Message Broker
 - **MassTransit** - Transporte de mensagens
-- **SQLite** - Banco de dados
+- **Azure SQL Database** - Banco de dados
 - **Moq e FluentAssertions** - Testes unitários
 - **Prometheus e Grafana** - Monitoramento e visualização de métricas.
 - **Node Exporter** - Coleta de métricas de hardware e sistema.
+- **Azure Function** - Para obtenção dos dados de contato.
+- **Ocelot** - API Gateway
